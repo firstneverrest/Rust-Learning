@@ -18,12 +18,53 @@ Rust is fast and memory-efficient programming language. Rust has no runtime or g
 
 Run Rust with rustc compiler: `rustc main.rs`.
 
+- require semicolon
+- name convention is snake case
+- use `//` to commend
+
 ```rust
 // main.rs
 fn main() {
     println!("Hello, world!");
 }
 ```
+
+## Data Type
+
+Rust is a statically typed language and use `let` keyword to declare a variable with immutable type. Rust's number separator allow you to insert underscore to separate digits.
+
+- integer
+- floating-point
+- booleans
+- character
+
+```rust
+fn main() {
+   let mut age = 21
+   let name = "Chitsanupong";  // string type
+   let salary = 30_000.00;  // float type
+   let is_male = true; // boolean type
+   let heart_icon = '♥'; //unicode character type
+
+   println!("name is:{}",company_string);
+   println!("salary is:{}",rating_float);
+   println!("is male:{}",is_growing_boolean);
+   println!("icon:{}",icon_char);
+}
+```
+
+## Constants
+
+declare constant with uppercase and use `const` keyword.
+
+```rust
+const CANDIDATE_LIMIT:i32 = 50
+```
+
+## String
+
+- String literal (&str) - a set of characters which are hardcoded into a variable (known at compile time).
+- String Object (String) - string object type provided in standard library.
 
 ## Carco
 
