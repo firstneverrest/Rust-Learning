@@ -66,6 +66,27 @@ const CANDIDATE_LIMIT:i32 = 50
 - String literal (&str) - a set of characters which are hardcoded into a variable (known at compile time).
 - String Object (String) - string object type provided in standard library.
 
+## Ownership rules
+
+Solve dangling pointer and memory leak problem with these rules:
+
+- each value in Rust has a variable that's called its owner.
+- there can only be one owner at a time like you have already declare x and you write y=x, x is owner not y.
+- when the owner goes out of scope, the value will be dropped.
+
+## Data structure
+
+Rust use Stack and Heap.
+
+### Stack
+
+Use with fixed-size variable
+
+- size of every variable on the stack has to be known at compile time.
+- when a function exits, the stack frame is released to return memory.
+
+### Heap
+
 ## Carco
 
 Cargo is the Rust package manager. Cargo downloads your Rust package's dependencies, compiles your packages, makes distributable packages.
@@ -73,7 +94,22 @@ Cargo is the Rust package manager. Cargo downloads your Rust package's dependenc
 ```bash
 # create new rust project
 cargo new <PROJECT_NAME>
+
+# compile only (not optimized + debug info)
+cargo check
+
+# compile and create binary file
+cargo build
+
+# build binary file and run
+cargo run
+
+# build for deployment (optimized)
+cargo build --release
 ```
+
+**Problem when build project with Cargo on Windows**
+use `rustup default stable-x86_64-pc-windows-gnu` command.
 
 ## Reference
 
