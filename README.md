@@ -87,6 +87,105 @@ Use with fixed-size variable
 
 ### Heap
 
+## Condition
+
+```rust
+fn main() {
+    let age = 20;
+    if age >= 20 {
+        println!("You are an adult: {}", age)
+    } else if age < 20 {
+        println!("You are a teenager: {}", age)
+    } else {
+        println!("Not allow!");
+    }
+}
+```
+
+## Match Statement
+
+Match statement checks if a current value is matching from a list of values like switch statement in C.
+
+```rust
+fn main() {
+    let position_code = "FD";
+    let position = match position_code {
+        "FD" => {println!("Found it!"); "Frontend Developer"},
+        "BD" => "Backend Developer",
+        "DO" => "DevOps",
+        "BA" => "Business Analyst",
+        _ => "Not our position"
+    };
+    println!("Position is {}", position);
+}
+```
+
+## Loop
+
+### For Loop
+
+```rust
+fn main() {
+   for x in 1..10{ // 10 is not inclusive
+      if x==3 {
+         continue;
+      }
+      println!("x is {}", x);
+   }
+}
+```
+
+### While Loop
+
+```rust
+fn main(){
+   let mut x = 0;
+   while x < 10{
+      x += 1;
+      println!("inside loop x value is {}", x);
+   }
+   println!("outside loop x value is {}", x); // x = 10
+}
+
+// indefinite loop
+fn main(){
+   let mut x = 0;
+   loop {
+      x += 1;
+      println!("x={}", x);
+
+      if x == 10 {
+         break;
+      }
+   }
+}
+```
+
+```rust
+fn main(){
+   let mut x = 0;
+   loop {
+      x += 1;
+      println!("x={}",x);
+
+      if x == 10 {
+         break;
+      }
+   }
+}
+```
+
+## Pointer
+
+```rust
+fn main() {
+    let mut n1 = 1;
+    let n2 = &mut n1;
+    *n2 = 20;
+    println!("{}", n1);
+}
+```
+
 ## Carco
 
 Cargo is the Rust package manager. Cargo downloads your Rust package's dependencies, compiles your packages, makes distributable packages.
