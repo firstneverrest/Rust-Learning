@@ -87,6 +87,12 @@ Use with fixed-size variable
 
 ### Heap
 
+Use with no size restrictions thing
+
+- It's accessible by anywhere in the program.
+- heap allocations are expensive and you should avoid.
+- automatically return memory when out of scope.
+
 ## Condition
 
 ```rust
@@ -183,6 +189,20 @@ fn main() {
     let n2 = &mut n1;
     *n2 = 20;
     println!("{}", n1);
+}
+```
+
+## Function
+
+```rust
+fn main() {
+    let mut n1 = 1;
+    changeN1(&mut n1);
+    println!("n1 = {}", n1);
+}
+
+fn changeN1(n1: &mut i32) {
+    *n1 = 2;
 }
 ```
 
