@@ -74,6 +74,61 @@ Solve dangling pointer and memory leak problem with these rules:
 - there can only be one owner at a time like you have already declare x and you write y=x, x is owner not y.
 - when the owner goes out of scope, the value will be dropped.
 
+```rust
+fn main() {
+    let n1 = String::from("Chitsanupong");
+    print_name(n1);
+    println!("{}", n1); // invalid because n1 is moved ownership to name
+}
+
+fn print_name(name: String) {
+    println!("{}", name);
+}
+```
+
+## Reference and Borrowing
+
+Transferring ownership to another variable is invalid in Rust when you use the first variable at a time. Therefore, you can use borrowing concept: create pointer that point to the first variable.
+
+```rust
+fn main() {
+    let n1 = String::from("Chitsanupong");
+    print_name(&n1);
+    println!("Main: {}", n1); // valid
+}
+
+fn print_name(name: &String) {
+    println!("Function: {}", name);
+}
+```
+
+```rust
+fn main() {
+    let n1 = String::from("hello"); // owner
+    let n2 = &n1;
+    drop(n2); // cannot drop s2 here, because it is not an owner
+    drop(n1);
+}
+```
+
+```rust
+fn main() {
+    let n1 = String::from("hello"); // owner
+    let n2 = &n1;
+    drop(n2); // cannot drop n2 here, because it is not an owner
+    drop(n1);
+}
+```
+
+```rust
+fn main() {
+    let n1 = String::from("hello");
+    let n2 = n1; // owner
+    drop(n2);
+    println!("{}", n1); // invalid because it was removed
+}
+```
+
 ## Data structure
 
 Rust use Stack and Heap.
