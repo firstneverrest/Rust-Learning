@@ -355,6 +355,78 @@ Use with no size restrictions thing
 - heap allocations are expensive and you should avoid.
 - automatically return memory when out of scope.
 
+## Vector
+
+A Vector is a resizable array. It stores values in contiguous memory blocks.
+
+```rust
+// let mut x: Vec<i32> = Vec::new();
+let mut x = vec![1, 2, 3];
+x.push(1);
+x.push(2);
+x.push(3);
+let y = x.pop();
+println!("{:?}", x);
+```
+
+## Hashmap
+
+A map is a collection of key-value pairs. No two entries in a map can have the same key.
+
+```rust
+fn main() {
+    let mut h: HashMap<&str, &str> = HashMap::new();
+    h.insert("a", "b");
+    h.insert("c", "d");
+    h.remove(&"a");
+    println!("{:?}", h);
+}
+```
+
+## Structure & Module
+
+Use _struct_ keyword to declare a structure. Structures are statically typed.
+
+```rust
+// main.rs
+use rust_learning::Person;
+
+fn main() {
+    let p = Person::new("Carlos".to_string(), 30);
+    println!("{}", p.get_name());
+    println!("{}", p.get_age());
+}
+```
+
+```rust
+// lib.rs
+// implement field (no function inside struct)
+pub struct Person {
+    name: String,
+    age: u8,
+}
+
+// implement behavior
+impl Person {
+    pub fn new(name: String, age: u8) -> Self {
+        Self {
+            name: name,
+            age: age,
+        }
+    }
+
+    // must use &self (borrow) to make it be function
+    // that can access from object not module
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn get_age(&self) -> u8 {
+        self.age
+    }
+}
+```
+
 ## Carco
 
 Cargo is the Rust package manager. Cargo downloads your Rust package's dependencies, compiles your packages, makes distributable packages.
