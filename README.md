@@ -53,6 +53,37 @@ fn main() {
 }
 ```
 
+## Variable, Tuple & Array
+
+```rust
+fn main() {
+    // variables
+    let x = 5; // immutable
+
+    let mut y = 5; // mutable
+    y = 10;
+    y = 25;
+
+    let (x, y) = (1, 2); // declare multiple variables
+
+    const PI: f32 = 3.14; // constant
+
+    // tuple
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    let x = tup.0;
+    let y = tup.1;
+    let z = tup.2;
+
+    // array
+    let arr = [1, 2, 3, 4, 5];
+    let arr2 = [3; 5]; // [3, 3, 3, 3, 3]
+    let arr3: [i32; 5]; // [0, 0, 0, 0, 0]
+    arr3 = [1, 2, 3, 4, 5];
+    println!("arr3: {:?}", arr3);
+}
+
+```
+
 ## Constants
 
 declare constant with uppercase and use `const` keyword.
@@ -65,6 +96,182 @@ const CANDIDATE_LIMIT:i32 = 50
 
 - String literal (&str) - a set of characters which are hardcoded into a variable (known at compile time).
 - String Object (String) - string object type provided in standard library.
+
+```rust
+let msg = "Hello, world!"; // literal
+let msg = String::from("Hello, world!"); // string object
+let msg = "Hello, world!".to_string(); // convert literal to string object
+```
+
+## Condition
+
+```rust
+fn main() {
+    let age = 20;
+    if age >= 20 {
+        println!("You are an adult: {}", age)
+    } else if age < 20 {
+        println!("You are a teenager: {}", age)
+    } else {
+        println!("Not allow!");
+    }
+}
+
+// another way
+let grade = if score >= 80 {
+   "A"
+} else if score >= 70 {
+   "B"
+} else if score >= 60 {
+   "C"
+} else if score >= 50 {
+   "D"
+} else {
+   "F"
+}
+
+// emulate ternary
+let pass = if score >= 50 { "yes" } else { "no" }
+```
+
+## Match Statement
+
+Match statement checks if a current value is matching from a list of values like switch statement in C.
+
+```rust
+fn main() {
+    let position_code = "FD";
+    let position = match position_code {
+        "FD" => {println!("Found it!"); "Frontend Developer"},
+        "BD" => "Backend Developer",
+        "DO" => "DevOps",
+        "BA" => "Business Analyst",
+        _ => "Not our position"
+    };
+    println!("Position is {}", position);
+}
+```
+
+## Loop
+
+### For Loop
+
+```rust
+fn main() {
+   for x in 1..10{ // 10 is not inclusive
+      if x==3 {
+         continue;
+      }
+      println!("x is {}", x);
+   }
+}
+
+// loop include upper bound
+for i in 0..=10 {
+   println!("{}", i); // print 0-10
+}
+
+// loop through array
+for n in [10, 20, 30].iter() {
+    println!("{}", n);
+}
+
+// loop tuple array
+let numbers = [(1, 2), (3, 4), (5, 6)];
+for (a, b) in numbers.iter() {
+    println!("{} {}", a, b);
+}
+```
+
+### While Loop
+
+```rust
+fn main(){
+   let mut x = 0;
+   while x < 10{
+      x += 1;
+      println!("inside loop x value is {}", x);
+   }
+   println!("outside loop x value is {}", x); // x = 10
+}
+
+// indefinite loop
+fn main(){
+   let mut x = 0;
+   loop {
+      x += 1;
+      println!("x={}", x);
+
+      if x == 10 {
+         break;
+      }
+   }
+}
+
+// define loop name
+fn main() {
+    let mut x = 1;
+    'loop1: loop {
+        println!("Loop 1: {}", x);
+        'loop2: loop {
+            if x == 5 {
+                break 'loop1;
+            }
+            if x == 9 {
+                break 'loop2;
+            }
+            println!("Loop 2: {}", x);
+            x += 1;
+        }
+    }
+}
+```
+
+```rust
+fn main(){
+   let mut x = 0;
+   loop {
+      x += 1;
+      println!("x={}",x);
+
+      if x == 10 {
+         break;
+      }
+   }
+}
+```
+
+## Pointer
+
+```rust
+fn main() {
+    let mut n1 = 1;
+    let n2 = &mut n1;
+    *n2 = 20;
+    println!("{}", n1);
+}
+```
+
+## Function
+
+```rust
+fn main() {
+    let mut n1 = 1;
+    change_n1(&mut n1);
+    println!("n1 = {}", n1);
+
+    println!("{}", get_salary());
+}
+
+fn change_n1(n1: &mut i32) {
+    *n1 = 2;
+}
+
+fn get_salary() -> i32 {
+    let salary = 30000;
+    salary // return syntax
+}
+```
 
 ## Ownership rules
 
@@ -147,119 +354,6 @@ Use with no size restrictions thing
 - It's accessible by anywhere in the program.
 - heap allocations are expensive and you should avoid.
 - automatically return memory when out of scope.
-
-## Condition
-
-```rust
-fn main() {
-    let age = 20;
-    if age >= 20 {
-        println!("You are an adult: {}", age)
-    } else if age < 20 {
-        println!("You are a teenager: {}", age)
-    } else {
-        println!("Not allow!");
-    }
-}
-```
-
-## Match Statement
-
-Match statement checks if a current value is matching from a list of values like switch statement in C.
-
-```rust
-fn main() {
-    let position_code = "FD";
-    let position = match position_code {
-        "FD" => {println!("Found it!"); "Frontend Developer"},
-        "BD" => "Backend Developer",
-        "DO" => "DevOps",
-        "BA" => "Business Analyst",
-        _ => "Not our position"
-    };
-    println!("Position is {}", position);
-}
-```
-
-## Loop
-
-### For Loop
-
-```rust
-fn main() {
-   for x in 1..10{ // 10 is not inclusive
-      if x==3 {
-         continue;
-      }
-      println!("x is {}", x);
-   }
-}
-```
-
-### While Loop
-
-```rust
-fn main(){
-   let mut x = 0;
-   while x < 10{
-      x += 1;
-      println!("inside loop x value is {}", x);
-   }
-   println!("outside loop x value is {}", x); // x = 10
-}
-
-// indefinite loop
-fn main(){
-   let mut x = 0;
-   loop {
-      x += 1;
-      println!("x={}", x);
-
-      if x == 10 {
-         break;
-      }
-   }
-}
-```
-
-```rust
-fn main(){
-   let mut x = 0;
-   loop {
-      x += 1;
-      println!("x={}",x);
-
-      if x == 10 {
-         break;
-      }
-   }
-}
-```
-
-## Pointer
-
-```rust
-fn main() {
-    let mut n1 = 1;
-    let n2 = &mut n1;
-    *n2 = 20;
-    println!("{}", n1);
-}
-```
-
-## Function
-
-```rust
-fn main() {
-    let mut n1 = 1;
-    changeN1(&mut n1);
-    println!("n1 = {}", n1);
-}
-
-fn changeN1(n1: &mut i32) {
-    *n1 = 2;
-}
-```
 
 ## Carco
 
