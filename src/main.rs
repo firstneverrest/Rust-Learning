@@ -1,19 +1,15 @@
 #![allow(unused_variables)]
+#![allow(unused_assignments)]
+#![allow(unused_mut)]
+#![allow(dead_code)]
+#![allow(while_true)]
+#![allow(unreachable_code)]
+
+// use std::collections::HashMap;
+use rust_learning::Person;
 
 fn main() {
-    let n1 = 1;
-    let n2 = 2;
-    ex1_1();
-    println!("main");
-}
-
-fn ex1_1() {
-    let n3 = 3;
-    ex1_2();
-    println!("ex1_1");
-}
-
-fn ex1_2() {
-    let n4 = 4;
-    println!("ex1_2");
+    let p = Person::new("Carlos".to_string(), 30);
+    println!("{}", p.get_name());
+    println!("{}", p.get_age());
 }
