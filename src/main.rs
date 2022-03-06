@@ -6,10 +6,54 @@
 #![allow(unreachable_code)]
 
 // use std::collections::HashMap;
-use rust_learning::person::Person;
+// use rust_learning::person::Person;
 
 fn main() {
-    let p = Person::new("Carlos".to_string(), 30);
-    println!("{}", p.get_name());
-    println!("{}", p.get_age());
+    let grade = check_grade(30);
+    match grade {
+        GradeResult::Pass(grade) => println!("Pass Grade: {}", grade),
+        GradeResult::Failed(grade) => println!("Failed Grade: {}", grade),
+        GradeResult::Error(e) => println!("Error: {}", e),
+    }
+
+    let grade2 = check_grade2(30);
+    match grade2 {
+        Err(e) => println!("Error: {}", e),
+        Ok(grade) => println!("Grade: {}", grade),
+    }
+
+    let grade3 = check_grade2(60);
+    if grade3.is_err() {
+        return ;
+    }
+
+    // get grade3 value
+    let grade4 = grade3.unwrap();
+    println!("grade 4 {}", grade4);
+
+    enum GradeResult {
+        Pass(i16),
+        Failed(i16),
+        Error(String),
+    }   
+
+    fn check_grade(score: i16) -> GradeResult {
+        if score < 0 || score > 100 {
+            return GradeResult::Error("Your score is invalid!".to_string());
+        } else if score >= 50 {
+            return GradeResult::Pass(score);
+        } else {
+            return GradeResult::Failed(score);
+        }
+    }
+
+    fn check_grade2(score: i16) -> Result<String, String> {
+        if score < 0 || score > 100 {
+            return Err("Your score is invalid!".to_string());
+        } else if score >= 50 {
+            return Ok("Pass".to_string());
+        } else {
+            return Err("Failed".to_string());
+        }
+    }
 }
