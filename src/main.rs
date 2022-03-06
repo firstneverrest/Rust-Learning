@@ -6,7 +6,7 @@
 #![allow(unreachable_code)]
 
 // use std::collections::HashMap;
-use rust_learning::Person;
+use rust_learning::person::Person;
 
 fn main() {
     let p = Person::new("Carlos".to_string(), 30);
