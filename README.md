@@ -400,6 +400,11 @@ fn main() {
 
 ```rust
 // lib.rs
+pub mod person;
+```
+
+```rust
+// person.rs
 // implement field (no function inside struct)
 pub struct Person {
     name: String,
@@ -425,6 +430,81 @@ impl Person {
         self.age
     }
 }
+```
+
+## Traits (Interface class in OOP)
+
+## Enum
+
+```rust
+let color = Colors::Red;
+// cannot use if-else comparison with enum
+match color {
+    Colors::Red => println!("Red"),
+    Colors::Green => println!("Green"),
+    Colors::Blue => println!("Blue"),
+    _ => println!("Other"),
+}
+
+enum Colors {
+    Red,
+    Green,
+    Blue,
+}
+```
+
+```rust
+// use enum in error handling
+fn main() {
+    let grade = check_grade(30);
+    match grade {
+        GradeResult::Pass(grade) => println!("Pass Grade: {}", grade),
+        GradeResult::Failed(grade) => println!("Failed Grade: {}", grade),
+        GradeResult::Error(e) => println!("Error: {}", e),
+    }
+
+    fn check_grade(score: i16) -> GradeResult {
+        if score < 0 || score > 100 {
+            return GradeResult::Error("Your score is invalid!".to_string());
+        } else if score >= 50 {
+            return GradeResult::Pass(score);
+        } else {
+            return GradeResult::Failed(score);
+        }
+    }
+
+    enum GradeResult {
+        Pass(i16),
+        Failed(i16),
+        Error(String),
+    }
+}
+
+// use Result
+let grade2 = check_grade2(30);
+match grade2 {
+    Err(e) => println!("Error: {}", e),
+    Ok(grade) => println!("Grade: {}", grade),
+}
+
+fn check_grade2(score: i16) -> Result<String, String> {
+    if score < 0 || score > 100 {
+        return Err("Your score is invalid!".to_string());
+    } else if score >= 50 {
+        return Ok("Pass".to_string());
+    } else {
+        return Err("Failed".to_string());
+    }
+}
+
+// another way
+let grade3 = check_grade2(60);
+if grade3.is_err() {
+    return ;
+}
+
+let grade4 = grade3.unwrap(); // get grade3 value
+println!("grade 4 {}", grade4);
 ```
 
 ## Carco
