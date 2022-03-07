@@ -507,6 +507,25 @@ let grade4 = grade3.unwrap(); // get grade3 value
 println!("grade 4 {}", grade4);
 ```
 
+## Closure
+
+Closure is an anonymous functions that can be saved in a variable or pass as arguments to other functions.
+
+```rust
+let x = |a, b| a + b;
+println!("x: {}", x(1, 2));
+println!("x: {}", cal2(3, 4, x));
+
+fn cal<F>(a: i16, b: i16, f: F) -> i16
+    where F: Fn(i16, i16) -> i16 {
+    f(a, b)
+}
+
+fn cal2<F: Fn(i16, i16) -> i16>(a: i16, b: i16, f: F) -> i16 {
+    f(a, b)
+}
+```
+
 ## Carco
 
 Cargo is the Rust package manager. Cargo downloads your Rust package's dependencies, compiles your packages, makes distributable packages.
