@@ -56,4 +56,19 @@ fn main() {
             return Err("Failed".to_string());
         }
     }
+
+    // closure
+    let x = |a, b| a + b;
+    println!("x: {}", x(1, 2));
+    println!("x: {}", cal2(3, 4, x));
+
+    fn cal<F>(a: i16, b: i16, f: F) -> i16
+        where F: Fn(i16, i16) -> i16 {
+        f(a, b)
+    }
+
+    fn cal2<F: Fn(i16, i16) -> i16>(a: i16, b: i16, f: F) -> i16 {
+        f(a, b)
+    }
+
 }
